@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\0x16e8bea\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_FlowerWaltz.-969057155.00" t="ExcludeRecursive" />
+    <e p="C:\Users\0x16e8bea\Documents\FlowerWaltz" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets\Art" t="Include">
+        <e p="Shaders" t="Include">
+          <e p="Boid.compute" t="Include" />
+          <e p="Common.cginc" t="Include" />
+          <e p="LambertCutout.shader" t="Include" />
+          <e p="SimplexNoise3D.cginc" t="Include" />
+        </e>
+      </e>
+      <e p="Assets\Code" t="Include">
+        <e p="Actors" t="Include">
+          <e p="Boids" t="Include">
+            <e p="GPUBoid.cs" t="Include" />
+            <e p="GPUFlock.cs" t="Include" />
+            <e p="RotateForDemo.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Misc" t="Include">
+          <e p="CreateProjectFolders.cs" t="Include" />
+          <e p="ExampleClass.cs" t="Include" />
+        </e>
+      </e>
+      <e p="FlowerWaltz.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
