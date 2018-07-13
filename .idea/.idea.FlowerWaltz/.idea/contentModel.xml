@@ -9,6 +9,8 @@
           <e p="Boid.compute" t="Include" />
           <e p="Common.cginc" t="Include" />
           <e p="LambertCutout.shader" t="Include" />
+          <e p="Math.cginc" t="Include" />
+          <e p="Quaternion.cginc" t="Include" />
           <e p="SimplexNoise3D.cginc" t="Include" />
         </e>
       </e>
