@@ -1,25 +1,19 @@
-﻿#pragma kernel Init
-#pragma kernel Flock
+﻿#pragma kernel CSInit
+#pragma kernel CSFlock
 
 #include "UnityCG.cginc"
 #include "SimplexNoise3D.cginc"
 
-struct Boid
-{
-	float maxSpeed;
-};
-
-RWStructuredBuffer<Boid> boidBuffer;
 RWStructuredBuffer<float4> positionBuffer;
 RWStructuredBuffer<float4> rotationBuffer;
 RWStructuredBuffer<float4> velocityBuffer;
-RWStructuredBuffer<float4> attractorBuffer;
 
 float4 attractor;
 float deltaTime;
 float randomSeed;
 float nearbyDist;
 int instanceCount;
+float speed; 
 
 
 // Pseudo-random number generation.
@@ -65,25 +59,22 @@ float map(float value, float min1, float max1, float min2, float max2) {
 
 //}
 
-[numthreads(64, 1, 1)]
-void Init(uint id : SV_DispatchThreadID) {
-	Boid boid = boidBuffer[id.x];
+[numthreads(1, 1, 1)]
+void CSInit(uint id : SV_DispatchThreadID) {
     float4 p = positionBuffer[id.x];
     
 	p.xyz = AttractorPosition(id);
     p.w = 1;
     
-    attractorBuffer[id.x] = float4(p.xyz,1);
     positionBuffer[id.x] = p;
     velocityBuffer[id.x] = float4(0,0,0,0);
     rotationBuffer[id.x] = float4(0,0,0,0);
 }
 
 
-[numthreads(64,1,1)]
-void Flock (uint3 id : SV_DispatchThreadID)
+[numthreads(1,1,1)]
+void CSFlock (uint3 id : SV_DispatchThreadID)
 {
-	Boid boid = boidBuffer[id.x];
     float4 p = positionBuffer[id.x];
     float4 v = velocityBuffer[id.x];
     float4 r = rotationBuffer[id.x];
@@ -130,10 +121,18 @@ void Flock (uint3 id : SV_DispatchThreadID)
     cohesion += tempCohesion;
 
 	float3 direction = separation + normalize(a - p);
+	     	    
+	r = lerp(r, normalize(float4(direction,0)), deltaTime * 4);
+	p += r * speed * deltaTime; 
 	
-	positionBuffer[id.x].xyz += v * deltaTime;
-	velocityBuffer[id.x].xyz += direction * deltaTime;
-    rotationBuffer[id.x].xyz += v * deltaTime;
+	positionBuffer[id.x] = p;
+	rotationBuffer[id.x] = r;
+	//positionBuffer[id.x].xyz  = id.x;
+	//positionBuffer[id.x].xyz = 0;
+
+
+
+	//boidBuffer[id.x] = boid;
 
 }
 

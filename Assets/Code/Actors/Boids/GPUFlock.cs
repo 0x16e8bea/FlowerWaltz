@@ -14,8 +14,6 @@ namespace Code.Actors.Boids {
 
         [SerializeField] private GameObject _attractorObj;
 
-        [SerializeField] private GPUBoid[] _boidsData;
-
         [SerializeField] private Mesh _instanceMesh;
 
         [SerializeField] private int _instanceCount = 1000;
@@ -25,8 +23,6 @@ namespace Code.Actors.Boids {
         }
 
         [SerializeField] private float _spawnRadius;
-
-        [SerializeField] private float _maxSpeed;
 
         [SerializeField] private float _nearbyDis;
 
@@ -55,11 +51,6 @@ namespace Code.Actors.Boids {
             set { _attractorObj = value; }
         }
 
-        public GPUBoid[] BoidsData {
-            get { return _boidsData; }
-            set { _boidsData = value; }
-        }
-
         public Mesh InstanceMesh {
             get { return _instanceMesh; }
             set { _instanceMesh = value; }
@@ -68,11 +59,6 @@ namespace Code.Actors.Boids {
         public float SpawnRadius {
             get { return _spawnRadius; }
             set { _spawnRadius = value; }
-        }
-
-        public float MaxSpeed {
-            get { return _maxSpeed; }
-            set { _maxSpeed = value; }
         }
 
         public float NearbyDis {
@@ -131,20 +117,6 @@ namespace Code.Actors.Boids {
         private int cachedSubMeshIndex = -1;
         private readonly uint[] args = new uint[5] {0, 0, 0, 0, 0};
 
-        private GPUBoid CreateBoidData() {
-            var boidData = new GPUBoid();
-            //var pos = transform.position + Random.insideUnitSphere * _spawnRadius;
-            //var rot = Quaternion.Slerp(transform.rotation, Random.rotation, 0.3f);
-            //boidData.Pos = pos;
-            //boidData.Rot = rot.eulerAngles;
-//
-            //boidData.InstanceCount = InstanceCount;
-            
-            boidData.MaxSpeed = _maxSpeed;
-
-            return boidData;
-        }
-
         #endregion
 
         #region Monobehaviour functions
@@ -162,21 +134,8 @@ namespace Code.Actors.Boids {
         }
 
         private void Start() {
-            // Allocate compute buffer.
-            _boidBuffer = new ComputeBuffer(InstanceCount, 16);
-            _drawArgsBuffer = new ComputeBuffer(1, args.Length * sizeof(uint), ComputeBufferType.IndirectArguments);
-            _positionBuffer = new ComputeBuffer(InstanceCount, 16);
-            _rotationBuffer = new ComputeBuffer(InstanceCount, 16);
-            _velocityBuffer = new ComputeBuffer(InstanceCount, 16);
-            _attractorBuffer = new ComputeBuffer(InstanceCount, 16);
 
-            // Initialize boid data.
-            _boidObj = new GameObject[InstanceCount];
-            _boidsData = new GPUBoid[InstanceCount];
-
-            for (var i = 0; i < InstanceCount; i++) _boidsData[i] = CreateBoidData();
-            
-            ResetPositions();
+            InitComputeShader();
 
             // Clone the given material before using.
             _instanceMaterial = new Material(_instanceMaterial);
@@ -184,12 +143,18 @@ namespace Code.Actors.Boids {
             _materialCloned = true;
         }
 
-        private void ResetPositions() {
-            if (_positionBuffer == null || _boidBuffer == null) return;
+        private void InitComputeShader() {
+            // Allocate compute buffer.
+            _boidBuffer = new ComputeBuffer(InstanceCount, 16);
+            _drawArgsBuffer = new ComputeBuffer(1, args.Length * sizeof(uint), ComputeBufferType.IndirectArguments);
+            _positionBuffer = new ComputeBuffer(InstanceCount, 16);
+            _rotationBuffer = new ComputeBuffer(InstanceCount, 16);
+            _velocityBuffer = new ComputeBuffer(InstanceCount, 16);
+            _attractorBuffer = new ComputeBuffer(InstanceCount, 16);
+            
+            // Find the id of the kernel.
+            var kernel = _compute.FindKernel("Flock");
 
-            var kernel = _compute.FindKernel("Init");
-
-            _boidBuffer.SetData(_boidsData);
             _compute.SetBuffer(kernel, "boidBuffer", _boidBuffer);
             _compute.SetBuffer(kernel, "positionBuffer", _positionBuffer);
             _compute.SetBuffer(kernel, "rotationBuffer", _rotationBuffer);
@@ -201,13 +166,20 @@ namespace Code.Actors.Boids {
                 _attractorObj.transform.position.z,
                 _spread));
 
-            _compute.SetFloat("randomSeed", _randomSeed);
-            _compute.SetFloat("nearbyDist", _nearbyDis);
+            //_compute.SetFloat("randomSeed", _randomSeed);
+            //_compute.SetFloat("nearbyDist", _nearbyDis);
 
             _compute.Dispatch(kernel, InstanceCount, 1, 1);
 
             // Draw the mesh with instancing.
-            _instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
+            //_instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
+
+        }
+        
+        void OnRenderObject()
+        {
+            _instanceMaterial.SetPass(0);
+            Graphics.DrawProcedural(MeshTopology.Points, 1, instanceCount);
         }
 
 
@@ -215,9 +187,9 @@ namespace Code.Actors.Boids {
             UpdateParticles();
 
 
-            UpdateMaterial();
-            Graphics.DrawMeshInstancedIndirect(_instanceMesh, subMeshIndex, _instanceMaterial,
-                new Bounds(Vector3.zero, new Vector3(100.0f, 100.0f, 100.0f)), _drawArgsBuffer);
+            //UpdateMaterial();
+            //Graphics.DrawMeshInstancedIndirect(_instanceMesh, subMeshIndex, _instanceMaterial,
+            //    new Bounds(Vector3.zero, new Vector3(100.0f, 100.0f, 100.0f)), _drawArgsBuffer);
         }
 
         private void UpdateParticles() {
@@ -230,11 +202,10 @@ namespace Code.Actors.Boids {
                 if (_instanceMesh != null)
                     subMeshIndex = Mathf.Clamp(subMeshIndex, 0, _instanceMesh.subMeshCount - 1);
 
-                _boidBuffer.SetData(_boidsData);
                 _compute.SetBuffer(kernel, "boidBuffer", _boidBuffer);
-                _compute.SetBuffer(kernel, "positionBuffer", _positionBuffer);
-                _compute.SetBuffer(kernel, "rotationBuffer", _rotationBuffer);
-                _compute.SetBuffer(kernel, "velocityBuffer", _velocityBuffer);
+                //_compute.SetBuffer(kernel, "positionBuffer", _positionBuffer);
+                //_compute.SetBuffer(kernel, "rotationBuffer", _rotationBuffer);
+                //_compute.SetBuffer(kernel, "velocityBuffer", _velocityBuffer);
                 _compute.SetBuffer(kernel, "attractorBuffer", _attractorBuffer);
 
                 _compute.SetVector("attractor", new Vector4(
@@ -245,16 +216,20 @@ namespace Code.Actors.Boids {
 
                 _compute.SetInt("instanceCount", _instanceCount);
                 _compute.SetFloat("deltaTime", delta);
-                _compute.SetFloat("randomSeed", _randomSeed);
-                _compute.SetFloat("nearbyDist", _nearbyDis);
+                //_compute.SetFloat("randomSeed", _randomSeed);
+                //compute.SetFloat("nearbyDist", _nearbyDis);
 
                 _compute.Dispatch(kernel, InstanceCount, 1, 1);
+                
+                _instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
+                _instanceMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
+
             }
         }
 
         private void UpdateMaterial() {
-            _instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
-            _instanceMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
+            //_instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
+            //_instanceMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
 
             // Indirect args
             if (_instanceMesh != null) {

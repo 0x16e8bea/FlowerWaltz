@@ -342,10 +342,9 @@ MonoBehaviour:
   _boidPrefab: {fileID: 100000, guid: 43ae81209feed48a28fba6ced8910179, type: 3}
   _boidObj: []
   _attractorObj: {fileID: 1759138068}
-  _instanceMesh: {fileID: 4300008, guid: 1aa8e61905492454fbd69bcd682d9542, type: 3}
+  _instanceMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   _instanceCount: 100
   _spawnRadius: 3
-  _maxSpeed: 0.85
   _nearbyDis: 0.5
   _spread: 2
   _randomSeed: 13.53
@@ -428,7 +427,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1759138068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3, y: 2.253643, z: -8.44}
+  m_LocalPosition: {x: 0.127, y: 0, z: 0}
   m_LocalScale: {x: 0.070709944, y: 0.070709944, z: 0.070709944}
   m_Children: []
   m_Father: {fileID: 0}

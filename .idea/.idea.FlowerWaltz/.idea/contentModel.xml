@@ -9,6 +9,7 @@
           <e p="Boid.compute" t="Include" />
           <e p="Common.cginc" t="Include" />
           <e p="LambertCutout.shader" t="Include" />
+          <e p="LambertCutout2.shader" t="Include" />
           <e p="Math.cginc" t="Include" />
           <e p="Quaternion.cginc" t="Include" />
           <e p="SimplexNoise3D.cginc" t="Include" />
@@ -26,6 +27,11 @@
           <e p="CreateProjectFolders.cs" t="Include" />
           <e p="ExampleClass.cs" t="Include" />
         </e>
+      </e>
+      <e p="Assets\Test" t="Include">
+        <e p="ComputeShader.compute" t="Include" />
+        <e p="RunCompute.cs" t="Include" />
+        <e p="SurfShader.shader" t="Include" />
       </e>
       <e p="FlowerWaltz.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />
