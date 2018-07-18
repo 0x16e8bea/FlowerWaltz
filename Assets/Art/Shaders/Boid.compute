@@ -71,9 +71,9 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 		}
 	}
 
-	float avg = 1.0 / nearbyCount;
-	alignment *= avg;
-	cohesion *= avg;
+	float average = 1.0 / nearbyCount;
+	alignment *= average;
+	cohesion *= average;
 	cohesion = normalize(cohesion - particlePos);
 
 	float3 direction = alignment + separation + cohesion;
