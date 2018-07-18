@@ -17,31 +17,38 @@ float NeighbourDistance;
 float3 TargetPosition;
 CBUFFER_END
 
+// Hashing functon
 float hashFunc( float n )
 {
-	return frac(sin(n)*43758.5453);
+	return frac(sin(n)*54674.3456);
 }
 
+// Based on https://thebookofshaders.com/11/ and https://github.com/Shinao/Unity-GPU-Boids
 float noiseFunc( float3 x )
 {
-	float3 p = floor(x);
+	float3 i = floor(x);
 	float3 f = frac(x);
 
-	f = f*f*(3.0-2.0*f);
-	float n = p.x + p.y*57.0 + 113.0*p.z;
+	f = f * f * (3.0 - 2.0 * f);
+	float n = i.x + i.y * 58.0 + 146.0 * i.z;
 
 	return lerp(lerp(lerp( hashFunc(n+0.0), hashFunc(n+1.0),f.x),
-	lerp( hashFunc(n+57.0), hashFunc(n+58.0),f.x),f.y),
-	lerp(lerp( hashFunc(n+113.0), hashFunc(n+114.0),f.x),
-	lerp( hashFunc(n+170.0), hashFunc(n+171.0),f.x),f.y),f.z);
+	lerp( hashFunc(n+28.0), hashFunc(n+75.0),f.x),f.y),
+	lerp(lerp( hashFunc(n+123.0), hashFunc(n+162.0),f.x),
+	lerp( hashFunc(n+167.0), hashFunc(n+189.0),f.x),f.y),f.z);
 }
 
 [numthreads(WAVE_SIZE,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
+	// Index for which combined thread and thread group the compute shader is
+	// executing in.
 	uint instanceId = id.x;
 
+	// Calculate pseudorandom random noise.
 	float noise = clamp(noiseFunc(_Time / 100.0 + noiseOffsetBuffer[instanceId]), -1, 1) * 2.0 - 1.0;
+
+	// Calculate particle velocity and add noise. Based on https://github.com/Shinao/Unity-GPU-Boids
 	float particleVel = ParticleSpeed * (1.0 + noise * ParticleSpeedVariation);
 
 	float3 particlePos = positionBuffer[instanceId];
@@ -51,6 +58,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	float3 alignment = float3(0.0, 0.0, 0.0);
 	float3 cohesion = TargetPosition;
 
+	// Add self that is not counted (avoids division by zero later on).
 	uint nearbyCount = 1;
 	for (uint i = 0; i < ParticleCount; i++) {
 		if (i != int(instanceId)) {
@@ -58,28 +66,38 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 			if (distance(particlePos, positionBuffer[i]) < NeighbourDistance) {
 				float3 tempPosition = positionBuffer[i];
 
+				// Calculate scale to "attenuate" influence of seperation.
 				float3 deltaPos = particlePos - tempPosition;
-				float diffLen = (length(deltaPos));
-				float scaler = clamp(1.0 - diffLen / NeighbourDistance, 0.0, 1.0);
+				float deltaLen = (length(deltaPos));
+				float scaler = clamp(1.0 - deltaLen / NeighbourDistance, 0.0, 1.0);
 
-				separation += deltaPos * (scaler / diffLen);
+				// Integrate vectors for each behavioural component.
+				separation += deltaPos * (scaler / deltaLen);
 				alignment += rotationBuffer[i];
 				cohesion += tempPosition;
 
-				nearbyCount ++;
+				// Increment the nearby particle counter.
+				nearbyCount++;
 			}
 		}
 	}
 
+	// Get averages and normalize cohesion to obtain a vector of unit length.
 	float average = 1.0 / nearbyCount;
 	alignment *= average;
 	cohesion *= average;
 	cohesion = normalize(cohesion - particlePos);
 
+	// Direction based on each of the behavioural components.
 	float3 direction = alignment + separation + cohesion;
 
+	// Particle rotation speed.
 	float ip = exp(-RotationSpeed * DeltaTime);
 
+	// Calculate rotation and apply to rotation buffer. 
 	rotationBuffer[instanceId] = lerp((direction), normalize(particleDir), ip);
+
+	// Integrate rotation (direction of the particle) in the position buffer and 
+	// add velocity. Use delta time to make it framerate dependent.  
 	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (particleVel * DeltaTime);
 }
