@@ -30,7 +30,7 @@
       </e>
       <e p="Assets\Test" t="Include">
         <e p="ComputeShader.compute" t="Include" />
-        <e p="RunCompute.cs" t="Include" />
+        <e p="FlockSimulation.cs" t="Include" />
         <e p="SurfShader.shader" t="Include" />
       </e>
       <e p="FlowerWaltz.sln" t="IncludeFlat" />

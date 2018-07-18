@@ -1,141 +1,90 @@
-﻿#pragma kernel CSInit
-#pragma kernel CSFlock
+﻿#pragma kernel CSMain
+#define GROUP_SIZE 256
 
 #include "UnityCG.cginc"
-#include "SimplexNoise3D.cginc"
 
-RWStructuredBuffer<float4> positionBuffer;
-RWStructuredBuffer<float4> rotationBuffer;
-RWStructuredBuffer<float4> velocityBuffer;
-
-float4 attractor;
-float deltaTime;
-float randomSeed;
-float nearbyDist;
-int instanceCount;
-float speed; 
-
-
-// Pseudo-random number generation.
-// Based on https://github.com/keijiro/Swarm
-float Random(uint id, float u)
+float hash( float n )
 {
-    u = u * 0.0018372 + randomSeed * 0.0023849;
-    float v = id * 0.0013345;
-    float f = dot(float2(12.9898, 78.233), float2(u, v));
-    return frac(43758.5453 * sin(f));
+	return frac(sin(n)*43758.5453);
 }
 
-// Attractor position with spread parameter.
-// Based on https://github.com/keijiro/Swarm
-float3 AttractorPosition(uint id)
+// The noise function returns a value in the range -1.0f -> 1.0f
+float noise1( float3 x )
 {
-    // Between 0 and 2 pi
-    float u = Random(id, 1) * UNITY_PI * 2;
-    
-    // Between -1 and 1
-    float z = Random(id, 2) * 2 - 1;
-    
-    // Between 0 and 1
-    float l = Random(id, 3);
-    
-    float3 d = float3(float2(cos(u), sin(u)) * sqrt(1 - z * z), z) * sqrt(l);
-    return attractor.xyz + d * attractor.w;
+	float3 p = floor(x);
+	float3 f = frac(x);
+
+	f       = f*f*(3.0-2.0*f);
+	float n = p.x + p.y*57.0 + 113.0*p.z;
+
+	return lerp(lerp(lerp( hash(n+0.0), hash(n+1.0),f.x),
+					lerp( hash(n+57.0), hash(n+58.0),f.x),f.y),
+				lerp(lerp( hash(n+113.0), hash(n+114.0),f.x),
+					lerp( hash(n+170.0), hash(n+171.0),f.x),f.y),f.z);
 }
 
-float map(float value, float min1, float max1, float min2, float max2) {
-    // Convert the current value to a percentage.
-    // 0% - min1, 100% - max1
-    float perc = (value - min1) / (max1 - min1);
-    
-    // Do the same operation backwards with min2 and max2.
-    return perc * (max2 - min2) + min2;
-}
+RWStructuredBuffer<float3> positionBuffer;
+RWStructuredBuffer<float3> rotationBuffer;
+RWStructuredBuffer<float3> noiseOffsetBuffer;
 
-//float3 Seperate(Boid boid, Boid tempBoid) {
-    //return (boid.pos - tempBoid.pos);
-    
-//    return (boid.pos - tempBoid.pos) * abs(dot(boid.velocity, tempBoid.velocity)) * abs(dot(tempBoid.pos - boid.pos, tempBoid.velocity));
+CBUFFER_START(Params)
+	float DeltaTime;
+	float RotationSpeed;
+	float BoidSpeed;
+	float BoidSpeedVariation;
+	float3 FlockPosition;
+	float NeighbourDistance;
+	uint BoidsCount;
+CBUFFER_END
 
-//}
-
-[numthreads(1, 1, 1)]
-void CSInit(uint id : SV_DispatchThreadID) {
-    float4 p = positionBuffer[id.x];
-    
-	p.xyz = AttractorPosition(id);
-    p.w = 1;
-    
-    positionBuffer[id.x] = p;
-    velocityBuffer[id.x] = float4(0,0,0,0);
-    rotationBuffer[id.x] = float4(0,0,0,0);
-}
-
-
-[numthreads(1,1,1)]
-void CSFlock (uint3 id : SV_DispatchThreadID)
+[numthreads(GROUP_SIZE,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    float4 p = positionBuffer[id.x];
-    float4 v = velocityBuffer[id.x];
-    float4 r = rotationBuffer[id.x];
-    float4 a = 0;
-    a.xyz = AttractorPosition(id);
+	uint instanceId = id.x;
 
-	//separation
-	float3 separation = float3(0.0, 0.0, 0.0);
+	float noise = clamp(noise1(_Time / 100.0 + noiseOffsetBuffer[instanceId]), -1, 1) * 2.0 - 1.0;
+	float velocity = BoidSpeed * (1.0 + noise * BoidSpeedVariation);
 
-	//alignment
+	float3 boid_pos = positionBuffer[instanceId];
+	float3 boid_dir = rotationBuffer[instanceId];
+
+	float3 separation = float3(0, 0.0, 0);
 	float3 alignment = float3(0.0, 0.0, 0.0);
+	float3 cohesion = FlockPosition;
 
-	//cohesion
-	float3 cohesion = attractor;
-	float3 tempCohesion = float3(0.0, 0.0, 0.0);
-
-    float tempSpeed = 0;
-	uint nearbyCount = 0;
-
-    [loop]
-	for (int i = 0; i < int(instanceCount); i++)	{
-		if (i != int(id.x))
+	uint nearbyCount = 1; // Add self that is ignored in loop
+	for (uint i = 0; i < BoidsCount; i++) {
+		if (i == instanceId)
+			continue;
+		
+		if (distance(boid_pos, positionBuffer[i]) < NeighbourDistance)
 		{
-			float3 tempBoid = positionBuffer[i].xyz;
-			if (length(p.xyz - tempBoid) < nearbyDist)
-			{
-				separation += p.xyz - tempBoid;
+		// tempBoid = boidBuffer[i];
+			float3 tempPosition = positionBuffer[i];
 
-				alignment += velocityBuffer[i].xyz;
+			float3 diff = boid_pos - tempPosition;
+			float diffLen = (length(diff));
+			float scaler = clamp(1.0 - diffLen / NeighbourDistance, 0.0, 1.0);
+			
+			separation += diff * (scaler / diffLen);
+			alignment += rotationBuffer[i];
+			cohesion += tempPosition;
 
-				tempCohesion += p.xyz;
-
-				nearbyCount++;
-			}
+			nearbyCount += 1;
 		}
 	}
 
-	if (nearbyCount > 0)
-	{
-		alignment *= 1 / nearbyCount;
-		tempCohesion *= 1 / nearbyCount;
-	}
 
-    cohesion += tempCohesion;
+	float avg = 1.0 / nearbyCount;
+	alignment *= avg;
+	cohesion *= avg;
+	cohesion = normalize(cohesion - boid_pos);
 
-	float3 direction = separation + normalize(a - p);
-	     	    
-	r = lerp(r, normalize(float4(direction,0)), deltaTime * 4);
-	p += r * speed * deltaTime; 
+	float3 direction = alignment + separation + cohesion;
+
+	float ip = exp(-RotationSpeed * DeltaTime);
 	
-	positionBuffer[id.x] = p;
-	rotationBuffer[id.x] = r;
-	//positionBuffer[id.x].xyz  = id.x;
-	//positionBuffer[id.x].xyz = 0;
-
-
-
-	//boidBuffer[id.x] = boid;
-
+	rotationBuffer[instanceId] = lerp((direction), normalize(boid_dir), ip);
+	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (velocity * DeltaTime);
 }
-
-
-
 

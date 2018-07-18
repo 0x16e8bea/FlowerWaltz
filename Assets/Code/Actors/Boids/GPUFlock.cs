@@ -169,7 +169,7 @@ namespace Code.Actors.Boids {
             //_compute.SetFloat("randomSeed", _randomSeed);
             //_compute.SetFloat("nearbyDist", _nearbyDis);
 
-            _compute.Dispatch(kernel, InstanceCount, 1, 1);
+            _compute.Dispatch(kernel, InstanceCount / 256, 1, 1);
 
             // Draw the mesh with instancing.
             //_instanceMaterial.SetBuffer("positionBuffer", _positionBuffer);
