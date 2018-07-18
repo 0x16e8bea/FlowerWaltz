@@ -1,90 +1,85 @@
-﻿#pragma kernel CSMain
-#define GROUP_SIZE 256
+#pragma kernel CSMain
+#define WAVE_SIZE 256
 
 #include "UnityCG.cginc"
-
-float hash( float n )
-{
-	return frac(sin(n)*43758.5453);
-}
-
-// The noise function returns a value in the range -1.0f -> 1.0f
-float noise1( float3 x )
-{
-	float3 p = floor(x);
-	float3 f = frac(x);
-
-	f       = f*f*(3.0-2.0*f);
-	float n = p.x + p.y*57.0 + 113.0*p.z;
-
-	return lerp(lerp(lerp( hash(n+0.0), hash(n+1.0),f.x),
-					lerp( hash(n+57.0), hash(n+58.0),f.x),f.y),
-				lerp(lerp( hash(n+113.0), hash(n+114.0),f.x),
-					lerp( hash(n+170.0), hash(n+171.0),f.x),f.y),f.z);
-}
 
 RWStructuredBuffer<float3> positionBuffer;
 RWStructuredBuffer<float3> rotationBuffer;
 RWStructuredBuffer<float3> noiseOffsetBuffer;
 
 CBUFFER_START(Params)
-	float DeltaTime;
-	float RotationSpeed;
-	float BoidSpeed;
-	float BoidSpeedVariation;
-	float3 FlockPosition;
-	float NeighbourDistance;
-	uint BoidsCount;
+uint ParticleCount;
+float DeltaTime;
+float RotationSpeed;
+float ParticleSpeed;
+float ParticleSpeedVariation;
+float NeighbourDistance;
+float3 TargetPosition;
 CBUFFER_END
 
-[numthreads(GROUP_SIZE,1,1)]
+float hashFunc( float n )
+{
+	return frac(sin(n)*43758.5453);
+}
+
+float noiseFunc( float3 x )
+{
+	float3 p = floor(x);
+	float3 f = frac(x);
+
+	f = f*f*(3.0-2.0*f);
+	float n = p.x + p.y*57.0 + 113.0*p.z;
+
+	return lerp(lerp(lerp( hashFunc(n+0.0), hashFunc(n+1.0),f.x),
+	lerp( hashFunc(n+57.0), hashFunc(n+58.0),f.x),f.y),
+	lerp(lerp( hashFunc(n+113.0), hashFunc(n+114.0),f.x),
+	lerp( hashFunc(n+170.0), hashFunc(n+171.0),f.x),f.y),f.z);
+}
+
+[numthreads(WAVE_SIZE,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
 	uint instanceId = id.x;
 
-	float noise = clamp(noise1(_Time / 100.0 + noiseOffsetBuffer[instanceId]), -1, 1) * 2.0 - 1.0;
-	float velocity = BoidSpeed * (1.0 + noise * BoidSpeedVariation);
+	float noise = clamp(noiseFunc(_Time / 100.0 + noiseOffsetBuffer[instanceId]), -1, 1) * 2.0 - 1.0;
+	float particleVel = ParticleSpeed * (1.0 + noise * ParticleSpeedVariation);
 
-	float3 boid_pos = positionBuffer[instanceId];
-	float3 boid_dir = rotationBuffer[instanceId];
+	float3 particlePos = positionBuffer[instanceId];
+	float3 particleDir = rotationBuffer[instanceId];
 
-	float3 separation = float3(0, 0.0, 0);
+	float3 separation = float3(0.0, 0.0, 0.0);
 	float3 alignment = float3(0.0, 0.0, 0.0);
-	float3 cohesion = FlockPosition;
+	float3 cohesion = TargetPosition;
 
-	uint nearbyCount = 1; // Add self that is ignored in loop
-	for (uint i = 0; i < BoidsCount; i++) {
-		if (i == instanceId)
-			continue;
-		
-		if (distance(boid_pos, positionBuffer[i]) < NeighbourDistance)
-		{
-		// tempBoid = boidBuffer[i];
-			float3 tempPosition = positionBuffer[i];
+	uint nearbyCount = 1;
+	for (uint i = 0; i < ParticleCount; i++) {
+		if (i != int(instanceId)) {
 
-			float3 diff = boid_pos - tempPosition;
-			float diffLen = (length(diff));
-			float scaler = clamp(1.0 - diffLen / NeighbourDistance, 0.0, 1.0);
-			
-			separation += diff * (scaler / diffLen);
-			alignment += rotationBuffer[i];
-			cohesion += tempPosition;
+			if (distance(particlePos, positionBuffer[i]) < NeighbourDistance) {
+				float3 tempPosition = positionBuffer[i];
 
-			nearbyCount += 1;
+				float3 deltaPos = particlePos - tempPosition;
+				float diffLen = (length(deltaPos));
+				float scaler = clamp(1.0 - diffLen / NeighbourDistance, 0.0, 1.0);
+
+				separation += deltaPos * (scaler / diffLen);
+				alignment += rotationBuffer[i];
+				cohesion += tempPosition;
+
+				nearbyCount ++;
+			}
 		}
 	}
-
 
 	float avg = 1.0 / nearbyCount;
 	alignment *= avg;
 	cohesion *= avg;
-	cohesion = normalize(cohesion - boid_pos);
+	cohesion = normalize(cohesion - particlePos);
 
 	float3 direction = alignment + separation + cohesion;
 
 	float ip = exp(-RotationSpeed * DeltaTime);
-	
-	rotationBuffer[instanceId] = lerp((direction), normalize(boid_dir), ip);
-	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (velocity * DeltaTime);
-}
 
+	rotationBuffer[instanceId] = lerp((direction), normalize(particleDir), ip);
+	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (particleVel * DeltaTime);
+}

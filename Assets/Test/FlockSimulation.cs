@@ -99,8 +99,8 @@ public class FlockSimulation : MonoBehaviour {
         // Basic material properties.
         _props = new MaterialPropertyBlock();
         _props.SetFloat("_UniqueID", Random.value);
-        
-        // Get the shader kernel called CSMain. 
+
+        // Get the shader kernel called CSMain.
         _mComputeShaderKernelID = _computeFlock.FindKernel("CSMain");
 
         // Declare and initialize particle data arrays.
@@ -116,7 +116,7 @@ public class FlockSimulation : MonoBehaviour {
 
             noiseOffsetArray[i] = Random.value * 1000.0f;
         }
-        
+
          //Instantiate data buffers.
         _positionBuffer = new ComputeBuffer(_particleCount, 12);
         _rotationBuffer = new ComputeBuffer(_particleCount, 12);
@@ -130,11 +130,11 @@ public class FlockSimulation : MonoBehaviour {
     private void Update() {
         _computeFlock.SetFloat("DeltaTime", Time.deltaTime);
         _computeFlock.SetFloat("RotationSpeed", _rotationSpeed);
-        _computeFlock.SetFloat("BoidSpeed", _speed);
-        _computeFlock.SetFloat("BoidSpeedVariation", _speedVariation);
-        _computeFlock.SetVector("FlockPosition", _target.transform.position);
+        _computeFlock.SetFloat("ParticleSpeed", _speed);
+        _computeFlock.SetFloat("ParticleSpeedVariation", _speedVariation);
+        _computeFlock.SetVector("TargetPosition", _target.transform.position);
         _computeFlock.SetFloat("NeighbourDistance", _neighbourDistance);
-        _computeFlock.SetInt("BoidsCount", _particleCount);
+        _computeFlock.SetInt("ParticleCount", _particleCount);
 
         _computeFlock.SetBuffer(_mComputeShaderKernelID, "positionBuffer", _positionBuffer);
         _computeFlock.SetBuffer(_mComputeShaderKernelID, "rotationBuffer", _rotationBuffer);

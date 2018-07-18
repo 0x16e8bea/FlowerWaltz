@@ -222,11 +222,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _computeFlock: {fileID: 7200000, guid: 94eb23f4b69aca2478b16883b939bd98, type: 3}
-  _particleCount: 100
-  _spawnRadius: 1
+  _particleCount: 3000
+  _spawnRadius: 5
   _rotationSpeed: 4
   _speed: 6
-  _neighbourDistance: 2
+  _neighbourDistance: 5
   _speedVariation: 0.2
   _target: {fileID: 1136979615}
   _instanceMesh: {fileID: 4300008, guid: 1aa8e61905492454fbd69bcd682d9542, type: 3}
