@@ -8,30 +8,22 @@
         <e p="Shaders" t="Include">
           <e p="Boid.compute" t="Include" />
           <e p="Common.cginc" t="Include" />
-          <e p="LambertCutout.shader" t="Include" />
-          <e p="LambertCutout2.shader" t="Include" />
           <e p="Math.cginc" t="Include" />
           <e p="Quaternion.cginc" t="Include" />
           <e p="SimplexNoise3D.cginc" t="Include" />
+          <e p="SurfCutout.shader" t="Include" />
         </e>
       </e>
       <e p="Assets\Code" t="Include">
         <e p="Actors" t="Include">
           <e p="Boids" t="Include">
-            <e p="GPUBoid.cs" t="Include" />
-            <e p="GPUFlock.cs" t="Include" />
-            <e p="RotateForDemo.cs" t="Include" />
+            <e p="FlockSimulation.cs" t="Include" />
           </e>
         </e>
         <e p="Misc" t="Include">
           <e p="CreateProjectFolders.cs" t="Include" />
           <e p="ExampleClass.cs" t="Include" />
         </e>
-      </e>
-      <e p="Assets\Test" t="Include">
-        <e p="ComputeShader.compute" t="Include" />
-        <e p="FlockSimulation.cs" t="Include" />
-        <e p="SurfShader.shader" t="Include" />
       </e>
       <e p="FlowerWaltz.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />
