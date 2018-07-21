@@ -223,14 +223,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _computeFlock: {fileID: 7200000, guid: 94eb23f4b69aca2478b16883b939bd98, type: 3}
   _particleCount: 3000
-  _spawnRadius: 5
+  _spawnRadius: 10
   _rotationSpeed: 4
   _speed: 6
   _neighbourDistance: 5
   _speedVariation: 0.2
   _target: {fileID: 1136979615}
   _instanceMesh: {fileID: 4300008, guid: 1aa8e61905492454fbd69bcd682d9542, type: 3}
-  _boidMaterial: {fileID: 2100000, guid: 876df7f9fad38e04ab1694723f5289b8, type: 2}
+  _particleMaterial: {fileID: 2100000, guid: 876df7f9fad38e04ab1694723f5289b8, type: 2}
 --- !u!4 &337291996
 Transform:
   m_ObjectHideFlags: 0
