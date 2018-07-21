@@ -31,7 +31,7 @@
       <file leaf-file-name="RainbowFoldersSettings.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Plugins/RainbowAssets/RainbowFolders/Editor/Scripts/Settings/RainbowFoldersSettings.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2295">
+            <state relative-caret-position="-2473">
               <folding>
                 <marker date="1532197178838" expanded="false" signature="6:264" ph="..." />
                 <marker date="1532197178838" expanded="true" signature="314:8720" ph="{...}" />
@@ -80,7 +80,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimplexNoise3D.cginc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlockSimulation.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="587">
+              <caret line="165" column="1" selection-start-line="165" selection-start-column="1" selection-end-line="165" selection-end-column="1" />
+              <folding>
+                <marker date="1532207611321" expanded="true" signature="48:6220" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="99:6218" ph="{...}" />
+                <marker date="1532207611321" expanded="false" signature="703:2075" ph="Particle Properties" />
+                <marker date="1532207611321" expanded="true" signature="774:870" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="905:1003" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1038:1132" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1169:1267" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1296:1378" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1419:1525" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1563:1663" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1697:1781" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1816:1912" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="1951:2055" ph="{...}" />
+                <marker date="1532207611321" expanded="false" signature="2085:2312" ph="Buffers" />
+                <marker date="1532207611321" expanded="false" signature="2322:2502" ph="Shader Properties" />
+                <marker date="1532207611321" expanded="true" signature="2533:4380" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="2547:2715" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+                <marker date="1532207611321" expanded="true" signature="2902:2996" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="3574:3920" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="4412:5888" ph="{...}" />
+                <marker date="1532207611321" expanded="true" signature="5923:6212" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimplexNoise3D.cginc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="647">
@@ -130,9 +162,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Plugins/RainbowAssets/RainbowFolders/Editor/Scripts/Settings/RainbowFoldersSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Code/Misc/ExampleClass.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Common.cginc" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Math.cginc" root0="FORCE_HIGHLIGHTING" />
@@ -257,12 +289,12 @@
       <workItem from="1531740354260" duration="49260000" />
       <workItem from="1531929770403" duration="339000" />
       <workItem from="1531930209937" duration="8080000" />
-      <workItem from="1532204711605" duration="2079000" />
+      <workItem from="1532204711605" duration="2709000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180212000" />
+    <option name="totallyTimeSpent" value="180842000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,9 +462,16 @@
     <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="113" column="50" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Plugins/RainbowAssets/RainbowFolders/Editor/Scripts/Settings/RainbowFoldersSettings.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2295">
+        <state relative-caret-position="-2473">
           <folding>
             <marker date="1532197178838" expanded="false" signature="6:264" ph="..." />
             <marker date="1532197178838" expanded="true" signature="314:8720" ph="{...}" />
@@ -482,40 +521,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="76" column="18" lean-forward="true" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+        <state relative-caret-position="587">
+          <caret line="165" column="1" selection-start-line="165" selection-start-column="1" selection-end-line="165" selection-end-column="1" />
           <folding>
-            <marker date="1532206977952" expanded="true" signature="48:6732" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="80:147" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="205:6730" ph="{...}" />
-            <marker date="1532206977952" expanded="false" signature="929:2301" ph="Particle Properties" />
-            <marker date="1532206977952" expanded="true" signature="1000:1096" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1131:1229" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1264:1358" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1395:1493" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1522:1604" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1645:1751" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1789:1889" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="1923:2007" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="2042:2138" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="2177:2281" ph="{...}" />
-            <marker date="1532206977952" expanded="false" signature="2311:2538" ph="Buffers" />
-            <marker date="1532206977952" expanded="true" signature="2548:2729" ph="Shader Properties" />
-            <marker date="1532206977952" expanded="true" signature="2760:4771" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="2840:3008" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
-            <marker date="1532206977952" expanded="true" signature="3195:3289" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="3867:4311" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="4803:6400" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="6254:6389" ph="{...}" />
-            <marker date="1532206977952" expanded="true" signature="6435:6724" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="48:6220" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="99:6218" ph="{...}" />
+            <marker date="1532207611321" expanded="false" signature="703:2075" ph="Particle Properties" />
+            <marker date="1532207611321" expanded="true" signature="774:870" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="905:1003" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1038:1132" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1169:1267" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1296:1378" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1419:1525" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1563:1663" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1697:1781" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1816:1912" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="1951:2055" ph="{...}" />
+            <marker date="1532207611321" expanded="false" signature="2085:2312" ph="Buffers" />
+            <marker date="1532207611321" expanded="false" signature="2322:2502" ph="Shader Properties" />
+            <marker date="1532207611321" expanded="true" signature="2533:4380" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="2547:2715" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+            <marker date="1532207611321" expanded="true" signature="2902:2996" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="3574:3920" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="4412:5888" ph="{...}" />
+            <marker date="1532207611321" expanded="true" signature="5923:6212" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="113" column="50" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
         </state>
       </provider>
     </entry>

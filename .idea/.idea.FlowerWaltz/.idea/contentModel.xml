@@ -19,6 +19,7 @@
         <e p="Actors" t="Include">
           <e p="Boids" t="Include">
             <e p="FlockSimulation.cs" t="Include" />
+            <e p="FlockSimulationCPU.cs" t="Include" />
           </e>
         </e>
         <e p="Misc" t="Include">

@@ -204,12 +204,12 @@ GameObject:
   - component: {fileID: 337291996}
   - component: {fileID: 337291995}
   m_Layer: 0
-  m_Name: Particles
+  m_Name: CPU Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &337291995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,8 +221,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbda95e78671518489e39283d2de4fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boidPrefab: {fileID: 1021632962864950, guid: 457f5f660ff37634392c4a60a0194cd0,
+    type: 2}
+  _boids: []
   _computeFlock: {fileID: 7200000, guid: 94eb23f4b69aca2478b16883b939bd98, type: 3}
-  _particleCount: 3000
+  _particleCount: 100
   _spawnRadius: 10
   _rotationSpeed: 4
   _speed: 6
@@ -237,6 +240,56 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337291994}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &782493179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 782493181}
+  - component: {fileID: 782493180}
+  m_Layer: 0
+  m_Name: GPU Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &782493180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 782493179}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b103e866eba944abf9711cb5cd6dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _computeFlock: {fileID: 7200000, guid: 94eb23f4b69aca2478b16883b939bd98, type: 3}
+  _particleCount: 100
+  _spawnRadius: 10
+  _rotationSpeed: 4
+  _speed: 6
+  _neighbourDistance: 5
+  _speedVariation: 0.2
+  _target: {fileID: 1136979615}
+  _instanceMesh: {fileID: 4300008, guid: 1aa8e61905492454fbd69bcd682d9542, type: 3}
+  _particleMaterial: {fileID: 2100000, guid: 876df7f9fad38e04ab1694723f5289b8, type: 2}
+--- !u!4 &782493181
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 782493179}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -326,7 +379,7 @@ Transform:
   m_LocalScale: {x: 0.047286186, y: 0.047286186, z: 0.047286186}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920625690
 GameObject:
