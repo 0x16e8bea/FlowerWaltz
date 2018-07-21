@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -270,6 +270,69 @@ MonoBehaviour:
     LargeIcon: {fileID: 2800000, guid: 8033ba50d6a678f41bf129dd6a31ee12, type: 3}
     IsIconRecursive: 0
     IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 1
+    Key: Assets/Art
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: 6949abdccbc550143a4db42f22f9cf2b, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 1
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 1
+    Key: Assets/Code
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: 89bf83935dc6cd2408506058f75d07ab, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 1
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 0
+    Key: Art
+    SmallIcon: {fileID: 2800000, guid: 6949abdccbc550143a4db42f22f9cf2b, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 6949abdccbc550143a4db42f22f9cf2b, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 0
+    Key: Code
+    SmallIcon: {fileID: 2800000, guid: 89bf83935dc6cd2408506058f75d07ab, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 89bf83935dc6cd2408506058f75d07ab, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 0
+    Key: Mikkel
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: f546965c84b0def4ea93f0e0a56cc88b, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 0
+    Key: Rami
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: 62cdaebc98757f047bdcd5949c77ca90, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 1
+    Key: Assets/Game
+    SmallIcon: {fileID: 2800000, guid: 46b26c01aa7ee394d87c41688be29f61, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 46b26c01aa7ee394d87c41688be29f61, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 1
     Background: {fileID: 0}
     IsBackgroundRecursive: 0
     IsBackgroundCustom: 0

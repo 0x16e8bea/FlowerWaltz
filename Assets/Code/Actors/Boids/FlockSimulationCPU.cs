@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 
 namespace Code.Actors.Boids {
-    public class FlockSimulation : MonoBehaviour {
+
+    public struct BoidStruct {
+        public Vector3 Pos;
+        public Quaternion Rot; 
+    }
+    
+    public class FlockSimulationCPU : MonoBehaviour {
+        [SerializeField] private GameObject _boidPrefab;
+        [SerializeField] private GameObject[] _boids;
+        
         [SerializeField] private ComputeShader _computeFlock;
         [SerializeField] private int _particleCount = 100;
         [SerializeField] private float _spawnRadius = 10.0f;
@@ -80,11 +89,14 @@ namespace Code.Actors.Boids {
 
         private int _mComputeShaderKernelID;
         private MaterialPropertyBlock _props;
+
         private const int WAVE_SIZE = 256;
 
         #endregion
 
         private void Start() {
+            _boids = new GameObject[_particleCount];
+            
             // ComputeBuffer used for Graphics.DrawProceduralIndirect,
             // ComputeShader.DispatchIndirect or Graphics.DrawMeshInstancedIndirect
             // arguments.
@@ -111,6 +123,9 @@ namespace Code.Actors.Boids {
             for (var i = 0; i < _particleCount; i++) {
                 var pos = transform.position + (Random.insideUnitSphere * _spawnRadius);
                 var rot = Quaternion.Slerp(transform.rotation, Random.rotation, 0.3f);
+                
+                _boids[i] = Instantiate(_boidPrefab, pos, rot);
+                
                 positionArray[i] = pos;
                 rotationArray[i] = rot.eulerAngles;
 
@@ -147,13 +162,19 @@ namespace Code.Actors.Boids {
             // Set shader buffers.
             _particleMaterial.SetBuffer("positionBuffer", _positionBuffer);
             _particleMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
+            
+            var posArray = new Vector3[_particleCount];
+            var rotArray = new Quaternion[_particleCount];
 
-            // Draw the same mesh multiple times using GPU instancing.
-            Graphics.DrawMeshInstancedIndirect(
-                _instanceMesh, 0, _particleMaterial,
-                new Bounds(Vector3.zero, Vector3.one * 1000),
-                _drawArgsBuffer, 0, _props
-            );
+            _positionBuffer.GetData(posArray);
+            _rotationBuffer.GetData(rotArray);
+
+            for (var i = 0; i < _particleCount; i++) {
+                
+                _boids[i].transform.SetPositionAndRotation(posArray[i], rotArray[i]);
+                
+            }
+
         }
 
         private void OnDestroy() {
