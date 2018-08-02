@@ -80,11 +80,14 @@ namespace Code.Actors.Boids {
 
         private int _mComputeShaderKernelID;
         private MaterialPropertyBlock _props;
-        private const int WAVE_SIZE = 256;
+        private const int WAVE_SIZE = 32;
+        private int _waveCount;
 
         #endregion
 
         private void Start() {
+            _waveCount = Mathf.CeilToInt((float) _particleCount / WAVE_SIZE);
+            
             // ComputeBuffer used for Graphics.DrawProceduralIndirect,
             // ComputeShader.DispatchIndirect or Graphics.DrawMeshInstancedIndirect
             // arguments.
@@ -142,7 +145,7 @@ namespace Code.Actors.Boids {
             _computeFlock.SetBuffer(_mComputeShaderKernelID, "noiseOffsetBuffer", _noiseOffsetBuffer);
 
             // Dispatch to GPU with thread group size proportional to the particles.
-            _computeFlock.Dispatch(_mComputeShaderKernelID, _particleCount / WAVE_SIZE + 1, 1, 1);
+            _computeFlock.Dispatch(_mComputeShaderKernelID, _waveCount, 1, 1);
 
             // Set shader buffers.
             _particleMaterial.SetBuffer("positionBuffer", _positionBuffer);

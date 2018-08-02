@@ -1,5 +1,5 @@
 #pragma kernel CSMain
-#define WAVE_SIZE 256
+#define WAVE_SIZE 32
 
 #include "UnityCG.cginc"
 
@@ -66,13 +66,15 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 			if (distance(particlePos, positionBuffer[i]) < NeighbourDistance) {
 				float3 tempPosition = positionBuffer[i];
 
-				// Calculate scale to "attenuate" influence of seperation.
 				float3 deltaPos = particlePos - tempPosition;
 				float deltaLen = (length(deltaPos));
-				float scaler = clamp(1.0 - deltaLen / NeighbourDistance, 0.0, 1.0);
+				float frac = 1/NeighbourDistance;
 
-				// Integrate vectors for each behavioural component.
-				separation += deltaPos * (scaler / deltaLen);
+				// Scale that makes the range fall between 0 and the neighbourhood distance.
+				float scale = clamp(frac*(NeighbourDistance-deltaLen),0,1);
+
+				// Apply the scale and divide by deltaLen to get an exponential curve.
+				separation += normalize(deltaPos) * scale / deltaLen ;
 				alignment += rotationBuffer[i];
 				cohesion += tempPosition;
 
@@ -94,10 +96,10 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	// Particle rotation speed.
 	float ip = exp(-RotationSpeed * DeltaTime);
 
-	// Calculate rotation and apply to rotation buffer. 
+	// Calculate rotation and apply to rotation buffer.
 	rotationBuffer[instanceId] = lerp((direction), normalize(particleDir), ip);
 
-	// Integrate rotation (direction of the particle) in the position buffer and 
-	// add velocity. Use delta time to make it framerate dependent.  
+	// Integrate rotation (direction of the particle) in the position buffer and
+	// add velocity. Use delta time to make it framerate dependent.
 	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (particleVel * DeltaTime);
 }

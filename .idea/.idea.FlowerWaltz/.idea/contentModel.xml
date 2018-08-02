@@ -27,6 +27,7 @@
           <e p="ExampleClass.cs" t="Include" />
         </e>
       </e>
+      <e p="Assets\FPSDisplay.cs" t="Include" />
       <e p="Assets\Plugins" t="Include">
         <e p="AltProg" t="Include">
           <e p="CleanEmptyDir" t="Include">

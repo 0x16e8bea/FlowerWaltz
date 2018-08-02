@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -333,6 +333,15 @@ MonoBehaviour:
     LargeIcon: {fileID: 2800000, guid: 46b26c01aa7ee394d87c41688be29f61, type: 3}
     IsIconRecursive: 0
     IsIconCustom: 1
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
+  - Type: 1
+    Key: Assets/Plugins/Rokoko
+    SmallIcon: {fileID: 2800000, guid: 81d4c8f9bff9faf428c35c0b4de40701, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 4fe6b269af5e6bf4abab1a1d755508d2, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
     Background: {fileID: 0}
     IsBackgroundRecursive: 0
     IsBackgroundCustom: 0

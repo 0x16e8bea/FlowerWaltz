@@ -163,17 +163,17 @@ namespace Code.Actors.Boids {
             _particleMaterial.SetBuffer("positionBuffer", _positionBuffer);
             _particleMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
             
-            var posArray = new Vector3[_particleCount];
-            var rotArray = new Quaternion[_particleCount];
+                var posArray = new Vector3[_particleCount];
+                var rotArray = new Quaternion[_particleCount];
 
-            _positionBuffer.GetData(posArray);
-            _rotationBuffer.GetData(rotArray);
+                _positionBuffer.GetData(posArray);
+                _rotationBuffer.GetData(rotArray);
 
-            for (var i = 0; i < _particleCount; i++) {
-                
-                _boids[i].transform.SetPositionAndRotation(posArray[i], rotArray[i]);
-                
-            }
+                for (var i = 0; i < _particleCount; i++) {
+                    
+                    _boids[i].transform.SetPositionAndRotation(posArray[i], rotArray[i]);
+                    
+                }
 
         }
 
