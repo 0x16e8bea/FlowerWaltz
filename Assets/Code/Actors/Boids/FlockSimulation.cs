@@ -4,14 +4,21 @@ namespace Code.Actors.Boids {
     public class FlockSimulation : MonoBehaviour {
         [SerializeField] private ComputeShader _computeFlock;
         [SerializeField] private int _particleCount = 100;
+        [SerializeField] private float _drag = 0.0f;
         [SerializeField] private float _spawnRadius = 10.0f;
-        [SerializeField] private float _rotationSpeed = 1.0f;
+        [SerializeField] private float _attractionForce = 1.0f;
         [SerializeField] private float _speed = 1.0f;
+        [SerializeField] private float _gravity = 5.0f;
+        [SerializeField] private float _scale = 1.0f;
         [SerializeField] private float _neighbourDistance = 1.0f;
         [SerializeField] private float _speedVariation = 1.0f;
         [SerializeField] private Transform _target;
         [SerializeField] private Mesh _instanceMesh;
         [SerializeField] private Material _particleMaterial;
+
+        [SerializeField] private float _noiseFrequency;
+        [SerializeField] private float _noiseAmplitude;
+
 
         #region Particle Properties
 
@@ -30,9 +37,9 @@ namespace Code.Actors.Boids {
             set { _spawnRadius = value; }
         }
 
-        public float RotationSpeed {
-            get { return _rotationSpeed; }
-            set { _rotationSpeed = value; }
+        public float AttractionForce {
+            get { return _attractionForce; }
+            set { _attractionForce = value; }
         }
 
         public float Speed {
@@ -71,6 +78,7 @@ namespace Code.Actors.Boids {
 
         private ComputeBuffer _drawArgsBuffer;
         private ComputeBuffer _positionBuffer;
+        private ComputeBuffer _velocityBuffer;
         private ComputeBuffer _rotationBuffer;
         private ComputeBuffer _noiseOffsetBuffer;
 
@@ -108,41 +116,52 @@ namespace Code.Actors.Boids {
 
             // Declare and initialize particle data arrays.
             var positionArray = new Vector3[_particleCount];
+            var velocityArray = new Vector3[_particleCount];
             var rotationArray = new Vector3[_particleCount];
             var noiseOffsetArray = new float[_particleCount];
 
             for (var i = 0; i < _particleCount; i++) {
                 var pos = transform.position + (Random.insideUnitSphere * _spawnRadius);
                 var rot = Quaternion.Slerp(transform.rotation, Random.rotation, 0.3f);
+                var vel = new Vector3(0, 0, 0);
                 positionArray[i] = pos;
-                rotationArray[i] = rot.eulerAngles;
+                velocityArray[i] = vel;
+                rotationArray[i] = new Vector4(rot.eulerAngles.x, rot.eulerAngles.y, rot.eulerAngles.z);
 
                 noiseOffsetArray[i] = Random.value * 1000.0f;
             }
 
             // Instantiate data buffers.
             _positionBuffer = new ComputeBuffer(_particleCount, 12);
+            _velocityBuffer = new ComputeBuffer(_particleCount, 12);
             _rotationBuffer = new ComputeBuffer(_particleCount, 12);
             _noiseOffsetBuffer = new ComputeBuffer(_particleCount, 4);
 
             // Set data in buffers.
             _positionBuffer.SetData(positionArray);
+            _velocityBuffer.SetData(velocityArray);
             _rotationBuffer.SetData(rotationArray);
             _noiseOffsetBuffer.SetData(noiseOffsetArray);
         }
 
         private void Update() {
             _computeFlock.SetFloat("DeltaTime", Time.deltaTime);
-            _computeFlock.SetFloat("RotationSpeed", _rotationSpeed);
+            var drag = Mathf.Exp(-_drag * Time.deltaTime);
+            _computeFlock.SetFloat("Drag", drag);
+            _computeFlock.SetFloat("AttractionForce", _attractionForce);
+            _computeFlock.SetFloat("Gravity", _gravity);
             _computeFlock.SetFloat("ParticleSpeed", _speed);
             _computeFlock.SetFloat("ParticleSpeedVariation", _speedVariation);
             _computeFlock.SetVector("TargetPosition", _target.transform.position);
+            _computeFlock.SetVector("_NoiseParams", new Vector2(_noiseFrequency, _noiseAmplitude));
             _computeFlock.SetFloat("NeighbourDistance", _neighbourDistance);
             _computeFlock.SetInt("ParticleCount", _particleCount);
 
-            _computeFlock.SetBuffer(_mComputeShaderKernelID, "positionBuffer", _positionBuffer);
-            _computeFlock.SetBuffer(_mComputeShaderKernelID, "rotationBuffer", _rotationBuffer);
-            _computeFlock.SetBuffer(_mComputeShaderKernelID, "noiseOffsetBuffer", _noiseOffsetBuffer);
+            _computeFlock.SetBuffer(_mComputeShaderKernelID, "PositionBuffer", _positionBuffer);
+            _computeFlock.SetBuffer(_mComputeShaderKernelID, "VelocityBuffer", _velocityBuffer);
+            _computeFlock.SetBuffer(_mComputeShaderKernelID, "RotationBuffer", _rotationBuffer);
+            _computeFlock.SetBuffer(_mComputeShaderKernelID, "NoiseOffsetBuffer", _noiseOffsetBuffer);
+            
 
             // Dispatch to GPU with thread group size proportional to the particles.
             _computeFlock.Dispatch(_mComputeShaderKernelID, _waveCount, 1, 1);
@@ -150,6 +169,7 @@ namespace Code.Actors.Boids {
             // Set shader buffers.
             _particleMaterial.SetBuffer("positionBuffer", _positionBuffer);
             _particleMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
+            _particleMaterial.SetFloat("scale", _scale);
 
             // Draw the same mesh multiple times using GPU instancing.
             Graphics.DrawMeshInstancedIndirect(

@@ -2,41 +2,32 @@
 #define WAVE_SIZE 32
 
 #include "UnityCG.cginc"
+#include "SimplexNoise3D.cginc"
+#include "CurlNoise3D.cginc"
 
-RWStructuredBuffer<float3> positionBuffer;
-RWStructuredBuffer<float3> rotationBuffer;
-RWStructuredBuffer<float3> noiseOffsetBuffer;
+RWStructuredBuffer<float3> PositionBuffer;
+RWStructuredBuffer<float3> VelocityBuffer;
+RWStructuredBuffer<float3> RotationBuffer; // rot.x, rot.y, rot.z, scale
+RWStructuredBuffer<float3> NoiseOffsetBuffer;
 
 CBUFFER_START(Params)
 uint ParticleCount;
 float DeltaTime;
-float RotationSpeed;
+float LifeTime;
+float TriggerDistance;
+float Gravity;
+float Drag;
+float Scale;
+float AttractionForce;
 float ParticleSpeed;
 float ParticleSpeedVariation;
 float NeighbourDistance;
+float2 _NoiseParams;
+float3 _NoiseOffset;
 float3 TargetPosition;
+
+
 CBUFFER_END
-
-// Hashing functon
-float hashFunc( float n )
-{
-	return frac(sin(n)*54674.3456);
-}
-
-// Based on https://thebookofshaders.com/11/ and https://github.com/Shinao/Unity-GPU-Boids
-float noiseFunc( float3 x )
-{
-	float3 i = floor(x);
-	float3 f = frac(x);
-
-	f = f * f * (3.0 - 2.0 * f);
-	float n = i.x + i.y * 58.0 + 146.0 * i.z;
-
-	return lerp(lerp(lerp( hashFunc(n+0.0), hashFunc(n+1.0),f.x),
-	lerp( hashFunc(n+28.0), hashFunc(n+75.0),f.x),f.y),
-	lerp(lerp( hashFunc(n+123.0), hashFunc(n+162.0),f.x),
-	lerp( hashFunc(n+167.0), hashFunc(n+189.0),f.x),f.y),f.z);
-}
 
 [numthreads(WAVE_SIZE,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
@@ -45,37 +36,35 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	// executing in.
 	uint instanceId = id.x;
 
-	// Calculate pseudorandom random noise.
-	float noise = clamp(noiseFunc(_Time / 100.0 + noiseOffsetBuffer[instanceId]), -1, 1) * 2.0 - 1.0;
-
 	// Calculate particle velocity and add noise. Based on https://github.com/Shinao/Unity-GPU-Boids
-	float particleVel = ParticleSpeed * (1.0 + noise * ParticleSpeedVariation);
+	//float particleVel = ParticleSpeed * (1.0 + noise * ParticleSpeedVariation);
 
-	float3 particlePos = positionBuffer[instanceId];
-	float3 particleDir = rotationBuffer[instanceId];
+	float3 particlePos = PositionBuffer[instanceId];
+	float3 particleRot = RotationBuffer[instanceId];
+	float3 particleVel = VelocityBuffer[instanceId];
 
 	float3 separation = float3(0.0, 0.0, 0.0);
 	float3 alignment = float3(0.0, 0.0, 0.0);
-	float3 cohesion = TargetPosition;
+	float3 cohesion = 0;
 
 	// Add self that is not counted (avoids division by zero later on).
 	uint nearbyCount = 1;
 	for (uint i = 0; i < ParticleCount; i++) {
 		if (i != int(instanceId)) {
 
-			if (distance(particlePos, positionBuffer[i]) < NeighbourDistance) {
-				float3 tempPosition = positionBuffer[i];
+			if (distance(particlePos, PositionBuffer[i]) < NeighbourDistance) {
+				float3 tempPosition = PositionBuffer[i];
 
 				float3 deltaPos = particlePos - tempPosition;
 				float deltaLen = (length(deltaPos));
 				float frac = 1/NeighbourDistance;
-
+				
 				// Scale that makes the range fall between 0 and the neighbourhood distance.
 				float scale = clamp(frac*(NeighbourDistance-deltaLen),0,1);
 
 				// Apply the scale and divide by deltaLen to get an exponential curve.
-				separation += normalize(deltaPos) * scale / deltaLen ;
-				alignment += rotationBuffer[i];
+				separation += normalize(deltaPos) * scale / deltaLen;
+				alignment += VelocityBuffer[i];
 				cohesion += tempPosition;
 
 				// Increment the nearby particle counter.
@@ -89,17 +78,42 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	alignment *= average;
 	cohesion *= average;
 	cohesion = normalize(cohesion - particlePos);
-
+	
+    
 	// Direction based on each of the behavioural components.
 	float3 direction = alignment + separation + cohesion;
 
-	// Particle rotation speed.
-	float ip = exp(-RotationSpeed * DeltaTime);
-
 	// Calculate rotation and apply to rotation buffer.
-	rotationBuffer[instanceId] = lerp((direction), normalize(particleDir), ip);
+	RotationBuffer[instanceId] = RotationBuffer[instanceId];
+    PositionBuffer[instanceId] += VelocityBuffer[instanceId] * DeltaTime; 
 
+	VelocityBuffer[instanceId] *= Drag;
+	VelocityBuffer[instanceId] += (normalize(TargetPosition - PositionBuffer[instanceId]) * AttractionForce + separation + alignment + cohesion) * DeltaTime;
+	
+	if (particlePos.y > 0) {
+	float3 np = (PositionBuffer[instanceId] + _NoiseOffset) * _NoiseParams.x;
+    float3 n1 = snoise_grad(np);
+    float3 n2 = snoise_grad(np + float3(2.42f, 10.22f, 44.56f));
+    float3 curl = cross(n1, n2) * _NoiseParams.y;
+	
+    VelocityBuffer[instanceId] += curl * DeltaTime;
+    RotationBuffer[instanceId] = particleVel;    
+    
+    VelocityBuffer[instanceId].y -= Gravity * DeltaTime;
+    
+    } else {
+    
+    if (AttractionForce > 0) {
+        VelocityBuffer[instanceId].y += 10 * DeltaTime;
+        } else {
+        VelocityBuffer[instanceId] = 0;
+        }
+    }
 	// Integrate rotation (direction of the particle) in the position buffer and
 	// add velocity. Use delta time to make it framerate dependent.
-	positionBuffer[instanceId] += (rotationBuffer[instanceId]) * (particleVel * DeltaTime);
+	
+	//PositionBuffer[instanceId] += (RotationBuffer[instanceId]) * (particleVel * DeltaTime);
+	
+	//VelocityBuffer[instanceId] += (cross(n1, n2) * _NoiseParams.y + RotationBuffer[instanceId]) * DeltaTime;
+
 }

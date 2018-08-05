@@ -22,6 +22,10 @@ namespace Code.Actors.Boids {
         [SerializeField] private Mesh _instanceMesh;
         [SerializeField] private Material _particleMaterial;
 
+        [SerializeField] private float _noiseFrequency;
+        [SerializeField] private float _noiseAmplitude;
+
+
         #region Particle Properties
 
         public ComputeShader ComputeFlock {
@@ -149,6 +153,7 @@ namespace Code.Actors.Boids {
             _computeFlock.SetFloat("ParticleSpeed", _speed);
             _computeFlock.SetFloat("ParticleSpeedVariation", _speedVariation);
             _computeFlock.SetVector("TargetPosition", _target.transform.position);
+            _computeFlock.SetVector("_NoiseParams", new Vector2(_noiseFrequency, _noiseAmplitude));
             _computeFlock.SetFloat("NeighbourDistance", _neighbourDistance);
             _computeFlock.SetInt("ParticleCount", _particleCount);
 

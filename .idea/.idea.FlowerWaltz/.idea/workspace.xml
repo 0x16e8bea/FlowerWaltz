@@ -14,20 +14,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Boid.compute" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Boid.compute" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="115" column="4" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="SurfCutout.shader" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+            <state relative-caret-position="309">
+              <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
               <folding>
-                <marker date="1532905344051" expanded="true" signature="78:431" ph="{...}" />
-                <marker date="1532905344051" expanded="true" signature="446:2588" ph="{...}" />
-                <marker date="1532905344051" expanded="true" signature="461:2578" ph="{...}" />
+                <marker date="1533487809209" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
+                <marker date="1533487809209" expanded="true" signature="193:2842" ph="{...}" />
+                <marker date="1533487809209" expanded="true" signature="246:599" ph="{...}" />
+                <marker date="1533487809209" expanded="true" signature="614:2840" ph="{...}" />
+                <marker date="1533487809209" expanded="true" signature="629:2830" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlockSimulation.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="151" column="54" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="54" />
+              <folding>
+                <marker date="1533503147189" expanded="true" signature="48:7414" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="99:7412" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="982:2360" ph="Particle Properties" />
+                <marker date="1533503147189" expanded="true" signature="1053:1149" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1184:1282" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1317:1411" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1450:1552" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1581:1663" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1704:1810" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1848:1948" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="1982:2066" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="2101:2197" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="2236:2340" ph="{...}" />
+                <marker date="1533503147189" expanded="false" signature="2370:2644" ph="Buffers" />
+                <marker date="1533503147189" expanded="false" signature="2654:2865" ph="Shader Properties" />
+                <marker date="1533503147189" expanded="true" signature="2896:5157" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="3001:3169" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+                <marker date="1533503147189" expanded="true" signature="3356:3450" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="4089:4576" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="5189:7082" ph="{...}" />
+                <marker date="1533503147189" expanded="true" signature="7117:7406" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -36,22 +74,32 @@
       <file leaf-file-name="FlockSimulationCPU.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="165" column="29" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
+            <state relative-caret-position="-555">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
               <folding>
-                <marker date="1532707691855" expanded="true" signature="48:6768" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="80:147" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="205:6766" ph="{...}" />
-                <marker date="1532707691855" expanded="false" signature="929:2301" ph="Particle Properties" />
-                <marker date="1532707691855" expanded="false" signature="2311:2538" ph="Buffers" />
-                <marker date="1532707691855" expanded="false" signature="2548:2729" ph="Shader Properties" />
-                <marker date="1532707691855" expanded="true" signature="2760:4771" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="2840:3008" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
-                <marker date="1532707691855" expanded="true" signature="3195:3289" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="3867:4311" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="4803:6436" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="6274:6425" ph="{...}" />
-                <marker date="1532707691855" expanded="true" signature="6471:6760" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="48:6982" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="80:147" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="205:6980" ph="{...}" />
+                <marker date="1533342361115" expanded="false" signature="1043:2415" ph="Particle Properties" />
+                <marker date="1533342361115" expanded="true" signature="1114:1210" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1245:1343" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1378:1472" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1509:1607" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1636:1718" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1759:1865" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="1903:2003" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="2037:2121" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="2156:2252" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="2291:2395" ph="{...}" />
+                <marker date="1533342361115" expanded="false" signature="2425:2652" ph="Buffers" />
+                <marker date="1533342361115" expanded="false" signature="2662:2843" ph="Shader Properties" />
+                <marker date="1533342361115" expanded="true" signature="2874:4885" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="2954:3122" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+                <marker date="1533342361115" expanded="true" signature="3309:3403" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="3981:4425" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="4917:6650" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="6488:6639" ph="{...}" />
+                <marker date="1533342361115" expanded="true" signature="6685:6974" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -63,6 +111,7 @@
             <state>
               <folding>
                 <marker date="1532210339501" expanded="false" signature="6:264" ph="..." />
+                <marker date="1532210339501" expanded="true" signature="314:8720" ph="{...}" />
                 <marker date="1532210339501" expanded="true" signature="409:8718" ph="{...}" />
                 <marker date="1532210339501" expanded="true" signature="658:829" ph="/* --------------------------------------------------------------------- ... */" />
                 <marker date="1532210339501" expanded="true" signature="1029:1487" ph="{...}" />
@@ -108,32 +157,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlockSimulation.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
-              <folding>
-                <marker date="1532470700371" expanded="true" signature="99:6320" ph="{...}" />
-                <marker date="1532470700371" expanded="false" signature="703:2075" ph="Particle Properties" />
-                <marker date="1532470700371" expanded="false" signature="2085:2312" ph="Buffers" />
-                <marker date="1532470700371" expanded="true" signature="2322:2533" ph="Shader Properties" />
-                <marker date="1532470700371" expanded="true" signature="2564:4502" ph="{...}" />
-                <marker date="1532470700371" expanded="true" signature="2669:2837" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
-                <marker date="1532470700371" expanded="true" signature="3024:3118" ph="{...}" />
-                <marker date="1532470700371" expanded="true" signature="3696:4042" ph="{...}" />
-                <marker date="1532470700371" expanded="true" signature="4534:5990" ph="{...}" />
-                <marker date="1532470700371" expanded="true" signature="6025:6314" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FPSDisplay.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FPSDisplay.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+            <state relative-caret-position="471">
+              <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
               <folding>
                 <marker date="1533217104194" expanded="true" signature="60:1285" ph="{...}" />
                 <marker date="1533217104194" expanded="true" signature="317:363" ph="{...}" />
@@ -149,8 +177,17 @@
       <file leaf-file-name="SimplexNoise3D.cginc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1695">
-              <caret line="113" column="50" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
+            <state relative-caret-position="234">
+              <caret line="115" column="18" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CurlNoise3D.cginc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="50" column="16" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -159,52 +196,53 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>positionArray</find>
-      <find>velocity</find>
-      <find>o</find>
+      <find>noiseOffsetBuffer</find>
       <find>_positionBuffer</find>
-      <find>_BoidPosition</find>
-      <find>.leg</find>
-      <find>CreateBoidData</find>
-      <find>BoidBuffer</find>
-      <find>cut</find>
-      <find>_Cutoff</find>
-      <find>_boidMaterial</find>
-      <find>Particle</find>
-      <find>spawnR</find>
-      <find>spawn</find>
-      <find>speedV</find>
-      <find>_spawnRadius</find>
-      <find>speedVa</find>
-      <find>BoidSpeedVariation</find>
-      <find>GROUP_SIZE</find>
-      <find>BoidsCount</find>
-      <find>particleC</find>
-      <find>delta</find>
-      <find>separation</find>
-      <find>nearby</find>
+      <find>NoiseBuffer</find>
+      <find>NoiseOffsetBuffer</find>
+      <find>dt</find>
+      <find>cuto</find>
+      <find>VelocityBuffer</find>
+      <find>rotationBu</find>
+      <find>direction</find>
+      <find>particleDir</find>
+      <find>particleVel</find>
+      <find>TargetPosition</find>
       <find>cohesion</find>
-      <find>deltaDist</find>
-      <find>deltaLen</find>
-      <find>_mComputeShaderKernelID</find>
-      <find>pri</find>
-      <find>particlePos</find>
+      <find>0.95</find>
+      <find>buffer</find>
+      <find>drag</find>
+      <find>emiss</find>
+      <find>meta</find>
+      <find>_Metallic</find>
+      <find>InstanceID</find>
+      <find>_NoiseOffset</find>
+      <find>RotationBuffer</find>
+      <find>RotationBuffer[instanceID]</find>
+      <find>_Color</find>
+      <find>RotationBuffer[instanceId].xyz</find>
+      <find>m4</find>
+      <find>scale</find>
+      <find>RotationSpeed</find>
+      <find>_LookAtMatrix</find>
+      <find>rotation</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Plugins/RainbowAssets/RainbowFolders/Editor/Scripts/Settings/RainbowFoldersSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugins/RainbowAssets/RainbowFolders/Editor/Scripts/Settings/RainbowFoldersSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Code/Misc/ExampleClass.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Common.cginc" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Math.cginc" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -225,11 +263,13 @@
         <option value="$PROJECT_DIR$/Assets/Art/Shaders/LambertCutout2.shader" />
         <option value="$PROJECT_DIR$/Assets/Art/Shaders/Common.cginc" />
         <option value="$PROJECT_DIR$/Assets/Test/FlockSimulation.cs" />
+        <option value="$PROJECT_DIR$/Assets/FPSDisplay.cs" />
+        <option value="$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs" />
+        <option value="$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc" />
+        <option value="$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc" />
+        <option value="$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" />
         <option value="$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" />
         <option value="$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute" />
-        <option value="$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs" />
-        <option value="$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" />
-        <option value="$PROJECT_DIR$/Assets/FPSDisplay.cs" />
       </list>
     </option>
   </component>
@@ -253,20 +293,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="SolutionExplorer">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="FlowerWaltz (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <option name="show-file-system" value="false" />
-        <option name="show-all-items" value="false" />
-      </pane>
-      <pane id="Scratches" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -284,6 +310,20 @@
         </subPane>
         <option name="show-hidden-items" value="false" />
       </pane>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="FlowerWaltz (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,11 +370,12 @@
       <workItem from="1531930209937" duration="8080000" />
       <workItem from="1532204711605" duration="2709000" />
       <workItem from="1533216986344" duration="182000" />
+      <workItem from="1533340212340" duration="33197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223342000" />
+    <option name="totallyTimeSpent" value="256539000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -347,23 +388,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32763532" />
       <window_info anchor="right" id="Errors In Solution" order="3" weight="0.3295302" />
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50067115" side_tool="true" weight="0.0" />
       <window_info anchor="bottom" id="Unit Tests" order="10" weight="0.32905984" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.0" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32905984" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11342282" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.0" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.1459695" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.114605546" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unity" order="9" weight="0.15527065" />
       <window_info anchor="right" id="Database" order="4" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.49932885" visible="true" weight="0.32897604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="NuGet" order="12" weight="0.0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -371,7 +414,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49932885" weight="0.32905984" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,8 +425,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/RotateForDemo.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/GPUBoid.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/LambertCutout.shader" />
     <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/GPUFlock.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Code/Misc/ExampleClass.cs">
@@ -477,10 +517,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Test/FlockSimulation.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
+    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Spray/Spray.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1695">
-          <caret line="113" column="50" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
+        <state relative-caret-position="381">
+          <caret line="429" selection-start-line="429" selection-end-line="429" />
         </state>
       </provider>
     </entry>
@@ -489,6 +529,7 @@
         <state>
           <folding>
             <marker date="1532210339501" expanded="false" signature="6:264" ph="..." />
+            <marker date="1532210339501" expanded="true" signature="314:8720" ph="{...}" />
             <marker date="1532210339501" expanded="true" signature="409:8718" ph="{...}" />
             <marker date="1532210339501" expanded="true" signature="658:829" ph="/* --------------------------------------------------------------------- ... */" />
             <marker date="1532210339501" expanded="true" signature="1029:1487" ph="{...}" />
@@ -533,66 +574,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="165" column="29" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
-          <folding>
-            <marker date="1532707691855" expanded="true" signature="48:6768" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="80:147" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="205:6766" ph="{...}" />
-            <marker date="1532707691855" expanded="false" signature="929:2301" ph="Particle Properties" />
-            <marker date="1532707691855" expanded="false" signature="2311:2538" ph="Buffers" />
-            <marker date="1532707691855" expanded="false" signature="2548:2729" ph="Shader Properties" />
-            <marker date="1532707691855" expanded="true" signature="2760:4771" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="2840:3008" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
-            <marker date="1532707691855" expanded="true" signature="3195:3289" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="3867:4311" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="4803:6436" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="6274:6425" ph="{...}" />
-            <marker date="1532707691855" expanded="true" signature="6471:6760" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="91" column="67" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
-          <folding>
-            <marker date="1532470700371" expanded="true" signature="99:6320" ph="{...}" />
-            <marker date="1532470700371" expanded="false" signature="703:2075" ph="Particle Properties" />
-            <marker date="1532470700371" expanded="false" signature="2085:2312" ph="Buffers" />
-            <marker date="1532470700371" expanded="true" signature="2322:2533" ph="Shader Properties" />
-            <marker date="1532470700371" expanded="true" signature="2564:4502" ph="{...}" />
-            <marker date="1532470700371" expanded="true" signature="2669:2837" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
-            <marker date="1532470700371" expanded="true" signature="3024:3118" ph="{...}" />
-            <marker date="1532470700371" expanded="true" signature="3696:4042" ph="{...}" />
-            <marker date="1532470700371" expanded="true" signature="4534:5990" ph="{...}" />
-            <marker date="1532470700371" expanded="true" signature="6025:6314" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
-          <folding>
-            <marker date="1532905344051" expanded="true" signature="78:431" ph="{...}" />
-            <marker date="1532905344051" expanded="true" signature="446:2588" ph="{...}" />
-            <marker date="1532905344051" expanded="true" signature="461:2578" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        <state relative-caret-position="471">
+          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
           <folding>
             <marker date="1533217104194" expanded="true" signature="60:1285" ph="{...}" />
             <marker date="1533217104194" expanded="true" signature="317:363" ph="{...}" />
@@ -601,6 +586,103 @@
             <marker date="1533217104194" expanded="true" signature="917:997" ph="{...}" />
             <marker date="1533217104194" expanded="true" signature="1025:1073" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="115" column="18" selection-start-line="115" selection-start-column="7" selection-end-line="115" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="50" column="16" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+          <folding>
+            <marker date="1533487809209" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
+            <marker date="1533487809209" expanded="true" signature="193:2842" ph="{...}" />
+            <marker date="1533487809209" expanded="true" signature="246:599" ph="{...}" />
+            <marker date="1533487809209" expanded="true" signature="614:2840" ph="{...}" />
+            <marker date="1533487809209" expanded="true" signature="629:2830" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-555">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding>
+            <marker date="1533342361115" expanded="true" signature="48:6982" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="80:147" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="205:6980" ph="{...}" />
+            <marker date="1533342361115" expanded="false" signature="1043:2415" ph="Particle Properties" />
+            <marker date="1533342361115" expanded="true" signature="1114:1210" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1245:1343" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1378:1472" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1509:1607" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1636:1718" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1759:1865" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="1903:2003" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="2037:2121" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="2156:2252" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="2291:2395" ph="{...}" />
+            <marker date="1533342361115" expanded="false" signature="2425:2652" ph="Buffers" />
+            <marker date="1533342361115" expanded="false" signature="2662:2843" ph="Shader Properties" />
+            <marker date="1533342361115" expanded="true" signature="2874:4885" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="2954:3122" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+            <marker date="1533342361115" expanded="true" signature="3309:3403" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="3981:4425" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="4917:6650" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="6488:6639" ph="{...}" />
+            <marker date="1533342361115" expanded="true" signature="6685:6974" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="151" column="54" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="54" />
+          <folding>
+            <marker date="1533503147189" expanded="true" signature="48:7414" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="99:7412" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="982:2360" ph="Particle Properties" />
+            <marker date="1533503147189" expanded="true" signature="1053:1149" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1184:1282" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1317:1411" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1450:1552" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1581:1663" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1704:1810" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1848:1948" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="1982:2066" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="2101:2197" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="2236:2340" ph="{...}" />
+            <marker date="1533503147189" expanded="false" signature="2370:2644" ph="Buffers" />
+            <marker date="1533503147189" expanded="false" signature="2654:2865" ph="Shader Properties" />
+            <marker date="1533503147189" expanded="true" signature="2896:5157" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="3001:3169" ph="/* ComputeBuffer used for Graphics.DrawProceduralIndirect, ... */" />
+            <marker date="1533503147189" expanded="true" signature="3356:3450" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="4089:4576" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="5189:7082" ph="{...}" />
+            <marker date="1533503147189" expanded="true" signature="7117:7406" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="115" column="4" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
         </state>
       </provider>
     </entry>

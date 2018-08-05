@@ -1,4 +1,8 @@
-﻿Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
 
    Properties {
 		_Color ("Color", Color) = (1,1,1,1)
@@ -27,8 +31,9 @@
 		half _Emission;
 		half _Metallic;
 		fixed4 _Color;
+
  
-        #pragma surface surf Standard vertex:vert Lambert addshadow nolightmap alphatest:_Cutoff
+        #pragma surface surf Standard vertex:vert BlinnPhong addshadow nolightmap alphatest:_Cutoff
         #pragma instancing_options procedural:setup
 
         float4x4 _LookAtMatrix;
@@ -37,7 +42,8 @@
          #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
 
             StructuredBuffer<float3> positionBuffer; 
-            StructuredBuffer<float3> rotationBuffer; 
+            StructuredBuffer<float4> rotationBuffer; 
+            float scale;
 
          #endif
 
@@ -57,7 +63,7 @@
         {
             #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
                 _BoidPosition = positionBuffer[unity_InstanceID];
-                _LookAtMatrix = look_at_matrix(_BoidPosition, _BoidPosition + (rotationBuffer[unity_InstanceID] * -1), float3(0.0, 1.0, 0.0));
+                _LookAtMatrix = look_at_matrix(_BoidPosition, _BoidPosition + (rotationBuffer[unity_InstanceID].xyz * -1), float3(0.0, 1.0, 0.0));
             #endif
         }
      
@@ -67,6 +73,7 @@
 
             #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
                 v.vertex = mul(_LookAtMatrix, v.vertex);
+                v.vertex.xyz *= scale;
                 v.vertex.xyz += _BoidPosition;
             #endif
         }
@@ -77,7 +84,7 @@
 			o.Albedo = c.rgb;
 			o.Alpha = c.a;
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
-			o.Metallic = m.r;
+			o.Metallic = _Metallic * m.r;
 			o.Emission = _Emission * c.rgb;
 			o.Smoothness = _Glossiness * m.a;
          }
