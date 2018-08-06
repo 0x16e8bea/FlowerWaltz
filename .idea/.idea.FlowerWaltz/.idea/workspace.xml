@@ -14,26 +14,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Boid.compute" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Boid.compute" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="114" column="32" lean-forward="true" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+              <caret line="114" column="32" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SurfCutout.shader" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SurfCutout.shader" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="71" column="82" selection-start-line="71" selection-start-column="82" selection-end-line="71" selection-end-column="82" />
+            <state relative-caret-position="384">
+              <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
               <folding>
-                <marker date="1533515543478" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
-                <marker date="1533515543478" expanded="true" signature="193:3129" ph="{...}" />
-                <marker date="1533515543478" expanded="true" signature="246:641" ph="{...}" />
-                <marker date="1533515543478" expanded="true" signature="656:3127" ph="{...}" />
-                <marker date="1533515543478" expanded="true" signature="671:3117" ph="{...}" />
+                <marker date="1533518855295" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
+                <marker date="1533518855295" expanded="true" signature="193:3166" ph="{...}" />
+                <marker date="1533518855295" expanded="true" signature="246:641" ph="{...}" />
+                <marker date="1533518855295" expanded="true" signature="656:3164" ph="{...}" />
+                <marker date="1533518855295" expanded="true" signature="671:3154" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -157,23 +157,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FPSDisplay.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-              <folding>
-                <marker date="1533217104194" expanded="true" signature="60:1285" ph="{...}" />
-                <marker date="1533217104194" expanded="true" signature="317:363" ph="{...}" />
-                <marker date="1533217104194" expanded="true" signature="381:490" ph="{...}" />
-                <marker date="1533217104194" expanded="true" signature="506:1283" ph="{...}" />
-                <marker date="1533217104194" expanded="true" signature="917:997" ph="{...}" />
-                <marker date="1533217104194" expanded="true" signature="1025:1073" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SimplexNoise3D.cginc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc">
           <provider selected="true" editor-type-id="text-editor">
@@ -196,7 +179,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cohesion</find>
       <find>0.95</find>
       <find>buffer</find>
       <find>drag</find>
@@ -223,9 +205,10 @@
       <find>noiseOffsetBuffer</find>
       <find>noiseoffset</find>
       <find>lifetimeB</find>
-      <find>_BoidPosition</find>
       <find>l</find>
       <find>neighbourD</find>
+      <find>_BoidPosition</find>
+      <find>curl</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -237,7 +220,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Code/Misc/ExampleClass.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SimplexNoise3D.cginc" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/FPSDisplay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/Common.cginc" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" root0="FORCE_HIGHLIGHTING" />
@@ -268,8 +250,8 @@
         <option value="$PROJECT_DIR$/Assets/Art/Shaders/CurlNoise3D.cginc" />
         <option value="$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulationCPU.cs" />
         <option value="$PROJECT_DIR$/Assets/Code/Actors/Boids/FlockSimulation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" />
         <option value="$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute" />
+        <option value="$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader" />
       </list>
     </option>
   </component>
@@ -315,7 +297,7 @@
           <expand>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="FlowerWaltz (3 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="FlowerWaltz (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
@@ -370,12 +352,12 @@
       <workItem from="1531930209937" duration="8080000" />
       <workItem from="1532204711605" duration="2709000" />
       <workItem from="1533216986344" duration="182000" />
-      <workItem from="1533340212340" duration="40004000" />
+      <workItem from="1533340212340" duration="40650000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="263346000" />
+    <option name="totallyTimeSpent" value="263992000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -578,14 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
           <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-          <folding>
-            <marker date="1533217104194" expanded="true" signature="60:1285" ph="{...}" />
-            <marker date="1533217104194" expanded="true" signature="317:363" ph="{...}" />
-            <marker date="1533217104194" expanded="true" signature="381:490" ph="{...}" />
-            <marker date="1533217104194" expanded="true" signature="506:1283" ph="{...}" />
-            <marker date="1533217104194" expanded="true" signature="917:997" ph="{...}" />
-            <marker date="1533217104194" expanded="true" signature="1025:1073" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -665,24 +639,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="71" column="82" selection-start-line="71" selection-start-column="82" selection-end-line="71" selection-end-column="82" />
-          <folding>
-            <marker date="1533515543478" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
-            <marker date="1533515543478" expanded="true" signature="193:3129" ph="{...}" />
-            <marker date="1533515543478" expanded="true" signature="246:641" ph="{...}" />
-            <marker date="1533515543478" expanded="true" signature="656:3127" ph="{...}" />
-            <marker date="1533515543478" expanded="true" signature="671:3117" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/Boid.compute">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="114" column="32" lean-forward="true" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+          <caret line="114" column="32" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Art/Shaders/SurfCutout.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
+          <folding>
+            <marker date="1533518855295" expanded="true" signature="0:166" ph="/* Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)' ... */" />
+            <marker date="1533518855295" expanded="true" signature="193:3166" ph="{...}" />
+            <marker date="1533518855295" expanded="true" signature="246:641" ph="{...}" />
+            <marker date="1533518855295" expanded="true" signature="656:3164" ph="{...}" />
+            <marker date="1533518855295" expanded="true" signature="671:3154" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

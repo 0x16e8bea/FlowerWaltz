@@ -92,7 +92,7 @@ Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
 			o.Alpha = c.a;
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
 			o.Metallic = _Metallic * m.r;
-			o.Emission = _Emission * c.rgb;
+			o.Emission = _Emission * c.rgb * lerp(_Color1, _Color2, _mixAmount);
 			o.Smoothness = _Glossiness * m.a;
          }
  
