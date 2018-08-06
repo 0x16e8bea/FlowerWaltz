@@ -8,13 +8,13 @@
 RWStructuredBuffer<float3> PositionBuffer;
 RWStructuredBuffer<float3> VelocityBuffer;
 RWStructuredBuffer<float3> RotationBuffer; // rot.x, rot.y, rot.z, scale
-RWStructuredBuffer<float3> NoiseOffsetBuffer;
+RWStructuredBuffer<float> LifeTime;
 
 CBUFFER_START(Params)
 uint ParticleCount;
 float DeltaTime;
-float LifeTime;
 float TriggerDistance;
+float MaxLifeTime;
 float Gravity;
 float Drag;
 float Scale;
@@ -72,6 +72,10 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 			}
 		}
 	}
+	
+	if (distance(TargetPosition, particlePos) < TriggerDistance && LifeTime[instanceId] < MaxLifeTime) {
+	    LifeTime[instanceId] += 2 * DeltaTime;
+	}
 
 	// Get averages and normalize cohesion to obtain a vector of unit length.
 	float average = 1.0 / nearbyCount;
@@ -84,11 +88,16 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	float3 direction = alignment + separation + cohesion;
 
 	// Calculate rotation and apply to rotation buffer.
-	RotationBuffer[instanceId] = RotationBuffer[instanceId];
     PositionBuffer[instanceId] += VelocityBuffer[instanceId] * DeltaTime; 
 
 	VelocityBuffer[instanceId] *= Drag;
-	VelocityBuffer[instanceId] += (normalize(TargetPosition - PositionBuffer[instanceId]) * AttractionForce + separation + alignment + cohesion) * DeltaTime;
+	VelocityBuffer[instanceId] += (normalize(TargetPosition - PositionBuffer[instanceId])) * AttractionForce * (LifeTime[instanceId] / MaxLifeTime) * DeltaTime;
+	
+	VelocityBuffer[instanceId] += (separation + alignment + cohesion) * DeltaTime;
+	
+	if (LifeTime[instanceId] > 0) {
+	LifeTime[instanceId] -= DeltaTime;
+	}
 	
 	if (particlePos.y > 0) {
 	float3 np = (PositionBuffer[instanceId] + _NoiseOffset) * _NoiseParams.x;
@@ -96,15 +105,15 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float3 n2 = snoise_grad(np + float3(2.42f, 10.22f, 44.56f));
     float3 curl = cross(n1, n2) * _NoiseParams.y;
 	
-    VelocityBuffer[instanceId] += curl * DeltaTime;
+    VelocityBuffer[instanceId] += curl * (LifeTime[instanceId] / MaxLifeTime) * DeltaTime;
     RotationBuffer[instanceId] = particleVel;    
     
     VelocityBuffer[instanceId].y -= Gravity * DeltaTime;
     
     } else {
     
-    if (AttractionForce > 0) {
-        VelocityBuffer[instanceId].y += 10 * DeltaTime;
+    if (LifeTime[instanceId] > 0) {
+        VelocityBuffer[instanceId].y = abs(VelocityBuffer[instanceId].y);
         } else {
         VelocityBuffer[instanceId] = 0;
         }

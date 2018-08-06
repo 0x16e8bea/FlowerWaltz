@@ -133,7 +133,7 @@ namespace Code.Actors.Boids {
                 positionArray[i] = pos;
                 rotationArray[i] = rot.eulerAngles;
 
-                noiseOffsetArray[i] = Random.value * 1000.0f;
+                //noiseOffsetArray[i] = Random.value * 1000.0f;
             }
 
             // Instantiate data buffers.

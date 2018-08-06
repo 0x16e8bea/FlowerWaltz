@@ -5,7 +5,8 @@
 Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
 
    Properties {
-		_Color ("Color", Color) = (1,1,1,1)
+		_Color1 ("Color1", Color) = (1,1,1,1)
+		_Color2 ("Color1", Color) = (1,1,1,1)
 		_Emission ("Emission", Range(0,1)) = 0.0
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_BumpMap ("Bumpmap", 2D) = "bump" {}
@@ -30,7 +31,9 @@ Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
 		half _Glossiness;
 		half _Emission;
 		half _Metallic;
-		fixed4 _Color;
+		
+		fixed4 _Color1;
+		fixed4 _Color2;
 
  
         #pragma surface surf Standard vertex:vert BlinnPhong addshadow nolightmap alphatest:_Cutoff
@@ -38,11 +41,14 @@ Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
 
         float4x4 _LookAtMatrix;
         float3 _BoidPosition;
+        float _mixAmount;
 
          #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
 
             StructuredBuffer<float3> positionBuffer; 
+            StructuredBuffer<float> lifeTimeBuffer; 
             StructuredBuffer<float4> rotationBuffer; 
+            float maxLifeTime;
             float scale;
 
          #endif
@@ -63,6 +69,7 @@ Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
         {
             #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
                 _BoidPosition = positionBuffer[unity_InstanceID];
+                _mixAmount = max(lifeTimeBuffer[unity_InstanceID] / maxLifeTime, 0);
                 _LookAtMatrix = look_at_matrix(_BoidPosition, _BoidPosition + (rotationBuffer[unity_InstanceID].xyz * -1), float3(0.0, 1.0, 0.0));
             #endif
         }
@@ -79,7 +86,7 @@ Shader "BoidFlockSimple" { // StructuredBuffer + SurfaceShader
         }
  
          void surf (Input IN, inout SurfaceOutputStandard o) {
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * lerp(_Color1, _Color2, _mixAmount);
 			fixed4 m = tex2D (_MetallicGlossMap, IN.uv_MainTex); 
 			o.Albedo = c.rgb;
 			o.Alpha = c.a;

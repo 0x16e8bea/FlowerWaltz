@@ -6,6 +6,9 @@ namespace Code.Actors.Boids {
         [SerializeField] private int _particleCount = 100;
         [SerializeField] private float _drag = 0.0f;
         [SerializeField] private float _spawnRadius = 10.0f;
+        [SerializeField] private float _maxLifeTime = 5.0f;
+        [SerializeField] private float _triggerDistance = 5.0f;
+
         [SerializeField] private float _attractionForce = 1.0f;
         [SerializeField] private float _speed = 1.0f;
         [SerializeField] private float _gravity = 5.0f;
@@ -80,7 +83,7 @@ namespace Code.Actors.Boids {
         private ComputeBuffer _positionBuffer;
         private ComputeBuffer _velocityBuffer;
         private ComputeBuffer _rotationBuffer;
-        private ComputeBuffer _noiseOffsetBuffer;
+        private ComputeBuffer _lifeTimeBuffer;
 
         #endregion
 
@@ -118,7 +121,7 @@ namespace Code.Actors.Boids {
             var positionArray = new Vector3[_particleCount];
             var velocityArray = new Vector3[_particleCount];
             var rotationArray = new Vector3[_particleCount];
-            var noiseOffsetArray = new float[_particleCount];
+            var lifeTimeArray = new float[_particleCount];
 
             for (var i = 0; i < _particleCount; i++) {
                 var pos = transform.position + (Random.insideUnitSphere * _spawnRadius);
@@ -128,20 +131,20 @@ namespace Code.Actors.Boids {
                 velocityArray[i] = vel;
                 rotationArray[i] = new Vector4(rot.eulerAngles.x, rot.eulerAngles.y, rot.eulerAngles.z);
 
-                noiseOffsetArray[i] = Random.value * 1000.0f;
+                lifeTimeArray[i] = _maxLifeTime;
             }
 
             // Instantiate data buffers.
             _positionBuffer = new ComputeBuffer(_particleCount, 12);
             _velocityBuffer = new ComputeBuffer(_particleCount, 12);
             _rotationBuffer = new ComputeBuffer(_particleCount, 12);
-            _noiseOffsetBuffer = new ComputeBuffer(_particleCount, 4);
+            _lifeTimeBuffer = new ComputeBuffer(_particleCount, 4);
 
             // Set data in buffers.
             _positionBuffer.SetData(positionArray);
             _velocityBuffer.SetData(velocityArray);
             _rotationBuffer.SetData(rotationArray);
-            _noiseOffsetBuffer.SetData(noiseOffsetArray);
+            _lifeTimeBuffer.SetData(lifeTimeArray);
         }
 
         private void Update() {
@@ -151,6 +154,9 @@ namespace Code.Actors.Boids {
             _computeFlock.SetFloat("AttractionForce", _attractionForce);
             _computeFlock.SetFloat("Gravity", _gravity);
             _computeFlock.SetFloat("ParticleSpeed", _speed);
+            _computeFlock.SetFloat("MaxLifeTime", _maxLifeTime);
+            _computeFlock.SetFloat("TriggerDistance", _triggerDistance);
+
             _computeFlock.SetFloat("ParticleSpeedVariation", _speedVariation);
             _computeFlock.SetVector("TargetPosition", _target.transform.position);
             _computeFlock.SetVector("_NoiseParams", new Vector2(_noiseFrequency, _noiseAmplitude));
@@ -160,7 +166,7 @@ namespace Code.Actors.Boids {
             _computeFlock.SetBuffer(_mComputeShaderKernelID, "PositionBuffer", _positionBuffer);
             _computeFlock.SetBuffer(_mComputeShaderKernelID, "VelocityBuffer", _velocityBuffer);
             _computeFlock.SetBuffer(_mComputeShaderKernelID, "RotationBuffer", _rotationBuffer);
-            _computeFlock.SetBuffer(_mComputeShaderKernelID, "NoiseOffsetBuffer", _noiseOffsetBuffer);
+            _computeFlock.SetBuffer(_mComputeShaderKernelID, "LifeTime", _lifeTimeBuffer);
             
 
             // Dispatch to GPU with thread group size proportional to the particles.
@@ -168,7 +174,9 @@ namespace Code.Actors.Boids {
 
             // Set shader buffers.
             _particleMaterial.SetBuffer("positionBuffer", _positionBuffer);
+            _particleMaterial.SetBuffer("lifeTimeBuffer", _lifeTimeBuffer);
             _particleMaterial.SetBuffer("rotationBuffer", _rotationBuffer);
+            _particleMaterial.SetFloat("maxLifeTime", _maxLifeTime);
             _particleMaterial.SetFloat("scale", _scale);
 
             // Draw the same mesh multiple times using GPU instancing.
@@ -182,7 +190,7 @@ namespace Code.Actors.Boids {
         private void OnDestroy() {
             if (_positionBuffer != null) _positionBuffer.Release();
             if (_rotationBuffer != null) _rotationBuffer.Release();
-            if (_noiseOffsetBuffer != null) _noiseOffsetBuffer.Release();
+            if (_lifeTimeBuffer != null) _lifeTimeBuffer.Release();
             if (_drawArgsBuffer != null) _drawArgsBuffer.Release();
         }
     }
