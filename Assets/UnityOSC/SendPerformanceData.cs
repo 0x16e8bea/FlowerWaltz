@@ -3,7 +3,7 @@ using System.Collections;
 using Code.Misc;
 using UnityEngine.AI;
 
-public class SendPositionOnUpdate : MonoBehaviour {
+public class SendPerformanceData : MonoBehaviour {
 	[SerializeField] private OSC _osc;
 	[SerializeField] private FlowDescriptor _flowDescriptor;
 
