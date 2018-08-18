@@ -74,7 +74,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	}
 	
 	if (distance(TargetPosition, particlePos) < TriggerDistance && LifeTime[instanceId] < MaxLifeTime) {
-	    LifeTime[instanceId] += 2 * DeltaTime;
+	    LifeTime[instanceId] += 3 * DeltaTime;
 	}
 
 	// Get averages and normalize cohesion to obtain a vector of unit length.
