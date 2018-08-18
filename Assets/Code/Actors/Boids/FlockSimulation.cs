@@ -29,6 +29,10 @@ namespace Code.Actors.Boids {
             get { return _computeFlock; }
             set { _computeFlock = value; }
         }
+        public float TriggerDistance {
+            get { return _triggerDistance; }
+            set { _triggerDistance = value; }
+        }
 
         public int ParticleCount {
             get { return _particleCount; }
